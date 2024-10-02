@@ -29,6 +29,7 @@
           -->
         <size>1000M</size>
         <count>10</count>
+        <!-- <log_timestamp_format>ISO_8601</log_timestamp_format> -->  <!-- Default format is standard Unix. By enabling this option log time stamp would be shown as YYYY-MM-DD HH:MM.SS.millis -->
 
         <!-- <console>1</console> --> <!-- Default behavior is autodetection (log to console if not daemon mode and is tty) -->
         <!-- <console_log_level>trace</console_log_level> -->
