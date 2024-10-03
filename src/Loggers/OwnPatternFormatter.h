@@ -29,8 +29,10 @@ public:
 
     void format(const Poco::Message & msg, std::string & text) override;
     virtual void formatExtended(const DB::ExtendedLogMessage & msg_ext, std::string & text) const;
-
+    OwnPatternFormatter(bool color_, const std::string & format_ = "UNIX")
+        : Poco::PatternFormatter(""), color(color_), timestamp_format(format_) {}
 private:
+    std::string timestamp_format;
     const DateLUTImpl & server_timezone = DateLUT::serverTimezoneInstance();
     bool color;
 };

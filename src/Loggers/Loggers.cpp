@@ -71,6 +71,10 @@ void Loggers::buildLoggers(Poco::Util::AbstractConfiguration & config, Poco::Log
 
     auto log_level_string = config.getString("logger.level", "trace");
 
+    // Inside buildLoggers() function, after reading other logger-related settings
+    std::string log_timestamp_format = config.getString("logger.log_timestamp_format", "UNIX"); // Default is UNIX
+
+
     /// different channels (log, console, syslog) may have different loglevels configured
     /// The maximum (the most verbose) of those will be used as default for Poco loggers
     int max_log_level = 0;
@@ -109,7 +113,7 @@ void Loggers::buildLoggers(Poco::Util::AbstractConfiguration & config, Poco::Log
         if (config.getString("logger.formatting.type", "") == "json")
             pf = new OwnJSONPatternFormatter(config);
         else
-            pf = new OwnPatternFormatter;
+            pf = new OwnPatternFormatter(false, log_timestamp_format);
 
         Poco::AutoPtr<DB::OwnFormattingChannel> log = new DB::OwnFormattingChannel(pf, log_file);
         log->setLevel(log_level);
@@ -148,7 +152,7 @@ void Loggers::buildLoggers(Poco::Util::AbstractConfiguration & config, Poco::Log
         if (config.getString("logger.formatting.type", "") == "json")
             pf = new OwnJSONPatternFormatter(config);
         else
-            pf = new OwnPatternFormatter;
+            pf = new OwnPatternFormatter(false, log_timestamp_format);
 
         Poco::AutoPtr<DB::OwnFormattingChannel> errorlog = new DB::OwnFormattingChannel(pf, error_log_file);
         errorlog->setLevel(errorlog_level);
@@ -188,7 +192,7 @@ void Loggers::buildLoggers(Poco::Util::AbstractConfiguration & config, Poco::Log
         if (config.getString("logger.formatting.type", "") == "json")
             pf = new OwnJSONPatternFormatter(config);
         else
-            pf = new OwnPatternFormatter;
+            pf = new OwnPatternFormatter(false, log_timestamp_format);
 
         Poco::AutoPtr<DB::OwnFormattingChannel> log = new DB::OwnFormattingChannel(pf, syslog_channel);
         log->setLevel(syslog_level);
@@ -212,7 +216,7 @@ void Loggers::buildLoggers(Poco::Util::AbstractConfiguration & config, Poco::Log
         if (config.getString("logger.formatting.type", "") == "json")
             pf = new OwnJSONPatternFormatter(config);
         else
-            pf = new OwnPatternFormatter(color_enabled);
+            pf = new OwnPatternFormatter(color_enabled, log_timestamp_format);
         Poco::AutoPtr<DB::OwnFormattingChannel> log = new DB::OwnFormattingChannel(pf, new Poco::ConsoleChannel);
         log->setLevel(console_log_level);
         split->addChannel(log, "console");
