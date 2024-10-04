@@ -7,10 +7,11 @@
 #include <base/terminalColors.h>
 
 
-OwnPatternFormatter::OwnPatternFormatter(bool color_)
-    : Poco::PatternFormatter(""), color(color_)
+OwnPatternFormatter::OwnPatternFormatter(bool color_, const std::string & format_)
+    : Poco::PatternFormatter(""), timestamp_format(format_), color(color_)
 {
 }
+
 
 
 void OwnPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_ext, std::string & text) const
