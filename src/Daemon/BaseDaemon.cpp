@@ -625,7 +625,8 @@ void BaseDaemon::setupWatchdog()
             if (config().getString("logger.formatting.type", "") == "json")
                 pf = new OwnJSONPatternFormatter(config());
             else
-                pf = new OwnPatternFormatter;
+                pf = new OwnPatternFormatter(false, "ISO_8601");
+
             Poco::AutoPtr<OwnFormattingChannel> log = new OwnFormattingChannel(pf, new Poco::ConsoleChannel(std::cerr));
             logger().setChannel(log);
         }
