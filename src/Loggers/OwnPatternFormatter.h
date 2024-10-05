@@ -25,8 +25,7 @@ class Loggers;
 class OwnPatternFormatter : public Poco::PatternFormatter
 {
 public:
-    OwnPatternFormatter(bool color_, const std::string & format_ = "UNIX")
-        : Poco::PatternFormatter(""), timestamp_format(format_), color(color_) {}
+    OwnPatternFormatter(bool color_, const std::string & format_ = "UNIX");
 
     void format(const Poco::Message & msg, std::string & text) override;
     virtual void formatExtended(const DB::ExtendedLogMessage & msg_ext, std::string & text) const;
