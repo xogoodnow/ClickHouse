@@ -9,6 +9,8 @@
 #include <Common/HashTable/Hash.h>
 
 OwnJSONPatternFormatter::OwnJSONPatternFormatter(Poco::Util::AbstractConfiguration & config)
+    : OwnPatternFormatter(false, "ISO_8601")
+
 {
     if (config.has("logger.formatting.names.date_time"))
         date_time = config.getString("logger.formatting.names.date_time", "");
