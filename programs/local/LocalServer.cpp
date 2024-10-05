@@ -618,7 +618,7 @@ void LocalServer::processConfig()
     {
         auto poco_logs_level = Poco::Logger::parseLevel(level);
         Poco::Logger::root().setLevel(poco_logs_level);
-        Poco::AutoPtr<OwnPatternFormatter> pf = new OwnPatternFormatter;
+        Poco::AutoPtr<OwnPatternFormatter> pf = new OwnPatternFormatter(true, "ISO_8601");
         Poco::AutoPtr<OwnFormattingChannel> log = new OwnFormattingChannel(pf, new Poco::SimpleFileChannel(server_logs_file));
         Poco::Logger::root().setChannel(log);
     }
