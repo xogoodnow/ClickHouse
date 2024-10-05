@@ -16,7 +16,7 @@ OwnPatternFormatter::OwnPatternFormatter(bool color_, const std::string & format
 
 void OwnPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_ext, std::string & text) const
 {
-    DB::WriteBufferFromString(wb, text);
+    DB::WriteBufferFromString wb(text);
 
     const Poco::Message & msg = msg_ext.base;
 
