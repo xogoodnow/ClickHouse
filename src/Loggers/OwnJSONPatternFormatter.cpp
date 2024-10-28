@@ -71,7 +71,7 @@ void OwnJSONPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_
         DB::writeChar(':', wb);
 
         DB::writeChar('\"', wb);
-        static const DateLUTImpl & utc_time_zone = DateLUT::instance('UTC');
+        static const DateLUTImpl & utc_time_zone = DateLUT::instance("UTC");
         /// Change delimiters in date for compatibility with old logs.
         writeDateTimeTextISO(msg_ext.time_seconds, 0, wb, utc_time_zone);
         DB::writeChar('.', wb);
