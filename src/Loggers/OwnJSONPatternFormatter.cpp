@@ -7,6 +7,7 @@
 #include <base/terminalColors.h>
 #include <Common/CurrentThread.h>
 #include <Common/HashTable/Hash.h>
+#include <IO/WriteHelpers.h>
 
 OwnJSONPatternFormatter::OwnJSONPatternFormatter(Poco::Util::AbstractConfiguration & config)
 {
