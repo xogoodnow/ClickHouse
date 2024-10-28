@@ -69,7 +69,7 @@ void OwnJSONPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_
 
         DB::writeChar('\"', wb);
         /// Change delimiters in date for compatibility with old logs.
-        writeDateTimeTextISO(msg_ext.time_seconds, 0, wb, utc_time_zone);
+        writeDateTimeTextISO(msg_ext.time_seconds, 0, wb, DateLUTImpl::utc_time_zone);
         DB::writeChar('.', wb);
         DB::writeChar('0' + ((msg_ext.time_microseconds / 100000) % 10), wb);
         DB::writeChar('0' + ((msg_ext.time_microseconds / 10000) % 10), wb);
