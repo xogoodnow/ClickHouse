@@ -7,7 +7,9 @@
 #include <base/terminalColors.h>
 #include <Common/CurrentThread.h>
 #include <Common/HashTable/Hash.h>
+#include <Common/DateLUT.h>
 #include <Common/DateLUTImpl.h>
+
 
 OwnJSONPatternFormatter::OwnJSONPatternFormatter(Poco::Util::AbstractConfiguration & config)
 {
@@ -69,6 +71,7 @@ void OwnJSONPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_
         DB::writeChar(':', wb);
 
         DB::writeChar('\"', wb);
+        static const DateLUTImpl & utc_time_zone = DateLUT::instace('UTC');
         /// Change delimiters in date for compatibility with old logs.
         writeDateTimeTextISO(msg_ext.time_seconds, 0, wb, utc_time_zone);
         DB::writeChar('.', wb);
