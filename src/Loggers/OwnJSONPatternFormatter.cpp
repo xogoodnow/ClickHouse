@@ -71,7 +71,7 @@ void OwnJSONPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_
 
     if (!date_time_xo.empty())
     {
-        writeJSONString(date_time, wb, settings);
+        writeJSONString(date_time_xo, wb, settings);
         DB::writeChar(':', wb);
 
         DB::writeChar('\"', wb);
