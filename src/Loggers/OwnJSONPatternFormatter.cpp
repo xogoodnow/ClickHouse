@@ -16,8 +16,8 @@ OwnJSONPatternFormatter::OwnJSONPatternFormatter(Poco::Util::AbstractConfigurati
     if (config.has("logger.formatting.names.date_time"))
         date_time = config.getString("logger.formatting.names.date_time", "");
 
-    if (config.has("logger.formatting.names.date_time_xo"))
-        date_time_xo= config.getString("logger.formatting.names.date_time_xo", "");
+    if (config.has("logger.formatting.names.date_time_utc"))
+        date_time_utc= config.getString("logger.formatting.names.date_time_utc", "");
 
     if (config.has("logger.formatting.names.thread_name"))
         thread_name = config.getString("logger.formatting.names.thread_name", "");
@@ -47,7 +47,7 @@ OwnJSONPatternFormatter::OwnJSONPatternFormatter(Poco::Util::AbstractConfigurati
         && logger_name.empty() && message.empty() && source_file.empty() && source_line.empty())
     {
         date_time = "date_time";
-        date_time_xo = "date_time_xo";
+        date_time_utc = "date_time_utc";
         thread_name = "thread_name";
         thread_id = "thread_id";
         level = "level";
@@ -69,9 +69,9 @@ void OwnJSONPatternFormatter::formatExtended(const DB::ExtendedLogMessage & msg_
     const Poco::Message & msg = msg_ext.base;
     DB::writeChar('{', wb);
 
-    if (!date_time_xo.empty())
+    if (!date_time_utc.empty())
     {
-        writeJSONString(date_time_xo, wb, settings);
+        writeJSONString(date_time_utc, wb, settings);
         DB::writeChar(':', wb);
 
         DB::writeChar('\"', wb);

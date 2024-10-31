@@ -33,7 +33,7 @@ public:
 
 private:
     std::string date_time;
-    std::string date_time_xo;
+    std::string date_time_utc;
     std::string thread_name;
     std::string thread_id;
     std::string level;
