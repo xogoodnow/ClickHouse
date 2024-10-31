@@ -47,7 +47,7 @@ OwnJSONPatternFormatter::OwnJSONPatternFormatter(Poco::Util::AbstractConfigurati
         && logger_name.empty() && message.empty() && source_file.empty() && source_line.empty())
     {
         date_time = "date_time";
-        date_time_xo = "date_time_xo"
+        date_time_xo = "date_time_xo";
         thread_name = "thread_name";
         thread_id = "thread_id";
         level = "level";
